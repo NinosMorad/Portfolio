@@ -8,25 +8,25 @@ const services = [
         num: '01',
         title: 'Web Development',
         description: 'Create functional, user-friendly websites and web applications.',
-        href:""
+        href:"/contact"
     },
     {
         num: '02',
         title: 'UI/UX Design',
         description: 'I make the interaction with the visual elements to be smoothly and the user experience to be including usability, accessibility, and satisfaction.',
-        href:""
+        href:"/contact"
     },
     {
         num: '03',
         title: 'Logo Design',
         description: 'Programming symbols, even many types of logos like many big brands.',
-        href:""
+        href:"/contact"
     },
     {
         num: '04',
         title: 'Networking',
         description: 'I have many types of connections, and in different line of businesses.',
-        href:""
+        href:"/contact"
     },
 ];
 

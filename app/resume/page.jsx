@@ -45,7 +45,6 @@ const about = {
 };
 
 // experience data
-// Här kan du ha när du börjat arbeta.
 
 // education data
 const education = {
@@ -97,7 +96,6 @@ const skills = {
         },
     ],
 };
-// lägg in Express och TypeScript också.
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 

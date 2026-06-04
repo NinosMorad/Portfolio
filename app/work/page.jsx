@@ -18,7 +18,7 @@ const projects =  [
     {
         num: "01",
         category: "frontend",
-        title: "project 1",
+        title: "Interactive Image Slider",
         description:
          "This my Slidershow, I had a assignment to make a slidershow without using simple packages.",
         stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
@@ -29,7 +29,7 @@ const projects =  [
     {
         num: "02",
         category: "fullstack",
-        title: "project 2",
+        title: "E-Commerce Shopping Cart",
         description:
          "This E-com website was a homework assignment, where you can add products and see them in the 'cart'.",
         stack: [{ name: "React" }, { name: "Tailwind.css" }, { name: "Node.js" }],
@@ -40,7 +40,7 @@ const projects =  [
     {
         num: "03",
         category: "frontend",
-        title: "project 3",
+        title: "Animal Search Portal",
         description:
          "The Animal page is a page I made for searching for different typ of cats.",
         stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
@@ -91,9 +91,8 @@ const Work = () => {
                             </ul>
                             {/* border */}
                             <div className="border border-white/20"></div>
-                            {/* buttons */} {/* https://www.youtube.com/watch?v=dImgZ_AH7uA&t=145s */}
-                            {/* du är på 2:27:04 */}
-                            <div className="flex items-center gap-4"> {/* Du är på denna raden. */}
+                            {/* buttons */} 
+                            <div className="flex items-center gap-4">
                                 {/* live project button */}
                                 <Link href={project.live}>
                                     <TooltipProvider delayDuration={100}>

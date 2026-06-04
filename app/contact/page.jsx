@@ -66,7 +66,7 @@ if (res.ok) {
     description: "Tack för ditt meddelande. Jag återkommer så snart jag kan.",
   });
 
-  // Töm formuläret
+
   setFormData({
     firstname: "",
     lastname: "",
@@ -95,7 +95,7 @@ className="py-12"
 >
 <div className="container mx-auto px-4">
 <div className="flex flex-col xl:flex-row gap-10">
-{/* Formulär */}
+{/* Form */}
 <div className="xl:w-[60%]">
 <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl" >
 <h3 className="text-4xl font-bold text-[#00ff99]">
@@ -165,7 +165,7 @@ Send me a message - I will answer as soon as possible!
         </form>
       </div>
 
-      {/* Kontaktinformation */}
+      {/* Contactinformation */}
       <div className="flex-1 flex items-center xl:justify-end">
         <ul className="flex flex-col gap-10">
           {info.map((item, index) => (

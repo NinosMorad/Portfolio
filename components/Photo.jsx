@@ -26,7 +26,7 @@ const Photo = () => {
                         src="/assets/Ninos.png" 
                         priority quality={100} 
                         fill 
-                        alt="" 
+                        alt="Profile photo of Ninos Morad, Full Stack Developer" 
                         className="object-contain"
                     />
                 </motion.div>
