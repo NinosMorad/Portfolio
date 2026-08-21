@@ -1,6 +1,31 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export async function POST(request) {
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const body = await request.json();
+
+    const { name, email, message } = body;
+
+    const data = await resend.emails.send({
+      from: "Portfolio <onboarding@resend.dev>",
+      to: ["din-email@example.com"],
+      subject: `Nytt meddelande från ${name}`,
+      replyTo: email,
+      text: message,
+    });
+
+    return Response.json({ success: true, data });
+  } catch (error) {
+    console.error(error);
+
+    return Response.json(
+      { success: false, error: "Kunde inte skicka meddelandet" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req) {
   // Verify API key
