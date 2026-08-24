@@ -51,37 +51,52 @@ setFormData({ ...formData, [e.target.name]: e.target.value });
 };
 
 const handleSubmit = async (e) => {
-e.preventDefault();
+  e.preventDefault();
 
+  try {
+    const res = await fetch("/api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-const res = await fetch("/api/send-email", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(formData),
-});
+    const data = await res.json();
 
-if (res.ok) {
-  toast({
-    title: "Meddelandet skickades!",
-    description: "Tack för ditt meddelande. Jag återkommer så snart jag kan.",
-  });
+    console.log("Email API response:", data);
 
+    if (res.ok) {
+      toast({
+        title: "Meddelandet skickades!",
+        description:
+          "Tack för ditt meddelande. Jag återkommer så snart jag kan.",
+      });
 
-  setFormData({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
-} else {
-  toast({
-    title: "Något gick fel",
-    description: "E-post kunde inte skickas. Försök igen senare.",
-    variant: "destructive",
-  });
-}
+      setFormData({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+    } else {
+      toast({
+        title: "Något gick fel",
+        description: data.error || "E-post kunde inte skickas.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+
+    toast({
+      title: "Något gick fel",
+      description: "Kunde inte kontakta servern.",
+      variant: "destructive",
+    });
+  }
 };
 
 return (

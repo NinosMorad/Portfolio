@@ -2,8 +2,12 @@ import { Resend } from "resend";
 
 export async function POST(request) {
   try {
-    // Kontrollera att API-nyckeln finns
-    if (!process.env.RESEND_API_KEY) {
+    const apiKey = process.env.RESEND_API_KEY;
+
+    // Kontrollera API-nyckeln
+    if (!apiKey) {
+      console.error("RESEND_API_KEY saknas i Vercel Environment Variables");
+
       return Response.json(
         {
           success: false,
@@ -13,11 +17,21 @@ export async function POST(request) {
       );
     }
 
-    // Skapa Resend-instansen först när endpointen anropas
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    console.log("RESEND_API_KEY finns");
 
-    // Läs informationen från formuläret
+    const resend = new Resend(apiKey);
+
+    // Läs formuläret
     const body = await request.json();
+
+    console.log("Form data received:", {
+      firstname: body.firstname,
+      lastname: body.lastname,
+      email: body.email,
+      phone: body.phone,
+      service: body.service,
+      message: body.message ? "Finns" : "Saknas",
+    });
 
     const {
       firstname,
@@ -33,14 +47,17 @@ export async function POST(request) {
       return Response.json(
         {
           success: false,
-          error: "Namn, efternamn, email och meddelande måste fyllas i.",
+          error:
+            "Firstname, lastname, email och message måste fyllas i.",
         },
         { status: 400 }
       );
     }
 
-    // Skicka email
-    const data = await resend.emails.send({
+    // Skicka email via Resend
+    console.log("Försöker skicka email via Resend...");
+
+    const { data, error } = await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
       to: ["ninosmorad@gmail.com"],
       replyTo: email,
@@ -58,17 +75,32 @@ ${message}
       `,
     });
 
+    // Resend returnerade ett fel
+    if (error) {
+      console.error("RESEND ERROR:", error);
+
+      return Response.json(
+        {
+          success: false,
+          error: error.message || "Resend kunde inte skicka email.",
+        },
+        { status: 500 }
+      );
+    }
+
+    console.log("Email skickat:", data);
+
     return Response.json({
       success: true,
       data,
     });
   } catch (error) {
-    console.error("Email error:", error);
+    console.error("SERVER ERROR:", error);
 
     return Response.json(
       {
         success: false,
-        error: "Kunde inte skicka meddelandet.",
+        error: error?.message || "Okänt serverfel.",
       },
       { status: 500 }
     );
