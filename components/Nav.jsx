@@ -29,18 +29,23 @@ const links = [
 const Nav = () => {
     const pathname = usePathname();
     return (
-        <nav className="flex gap-8">
-            {links.map((link, index) => {
-                return (
-                    <Link href={link.path} key={index} className={`${
-                    link.path === pathname && "text-[#00ff99] border-b-2 border-[#00ff99]"
-                    } capitalize font-medium hover:text-[#00ff99] transition-all`}
-                    >
-                        {link.name}
-                    </Link>
-                );
-            })}
-        </nav>
+        <nav className="flex flex-wrap justify-center gap-4 md:gap-8">
+  {links.map((link, index) => {
+    return (
+      <Link
+        href={link.path}
+        key={index}
+        className={`${
+          link.path === pathname
+            ? "text-[#00ff99] border-b-2 border-[#00ff99]"
+            : ""
+        } capitalize font-medium text-sm md:text-base hover:text-[#00ff99] transition-all`}
+      >
+        {link.name}
+      </Link>
+    );
+  })}
+</nav>
     );
 };
 
